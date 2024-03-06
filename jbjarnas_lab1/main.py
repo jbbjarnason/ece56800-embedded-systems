@@ -1,5 +1,3 @@
-import datetime
-
 print("starting")
 current_year = int(input("Year: "))
 current_month = int(input("Month: "))
