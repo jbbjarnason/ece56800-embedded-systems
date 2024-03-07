@@ -14,7 +14,7 @@ from machine import RTC, Timer, Pin, PWM
 
 # Create a RTC object.
 rtc = RTC()
-rtc.datetime((current_year, current_month, current_day, current_hour, current_minute, current_second, current_microsecond, 0))
+rtc.datetime((current_year, current_month, current_day, current_hour, current_minute, current_second, 0, current_microsecond))
 
 # Use second hardware timer of esp32
 timer = Timer(
@@ -26,7 +26,7 @@ timer = Timer(
 
 # Initialize and start a PWM signal on the external LED using a frequency of 1 Hz and a duty cycle of 256. The LED
 # should start blinking at the 1 Hz frequency.
-pwm0 = PWM(Pin(22), freq=1, duty_u16=256)
+pwm0 = PWM(Pin(22), freq=1, duty_u16=2560)
 
 # Detect a switch press using an interrupt/callback. Implement switch debouncing using another timer-based
 # interrupt/callback. The switch press in intended to affect the LED’s blink rate (i.e., the PWM frequency).
@@ -58,6 +58,6 @@ def change_frequency(state):
     frequency = pwm0.freq()
     if state:
         frequency = 5 if frequency == 1 else 1
-    pwm0.freq(frequency)
+        pwm0.freq(frequency)
 
 pin = Debounce(Pin(23, Pin.IN, Pin.PULL_UP), change_frequency)
