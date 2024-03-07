@@ -27,7 +27,7 @@ timer = Timer(
 
 # Initialize and start a PWM signal on the external LED using a frequency of 1 Hz and a duty cycle of 256. The LED
 # should start blinking at the 1 Hz frequency.
-pwm0 = PWM(Pin(22), freq=1, duty_u16=2560)
+pwm0 = PWM(Pin(22), freq=1, duty_u16=256)
 
 # Detect a switch press using an interrupt/callback. Implement switch debouncing using another timer-based
 # interrupt/callback. The switch press in intended to affect the LED’s blink rate (i.e., the PWM frequency).
