@@ -12,6 +12,7 @@ current_microsecond = int(input("Microsecond: "))
 
 # Import the machine module.
 from machine import RTC, Timer, Pin, PWM
+from time import sleep
 
 # Create a RTC object.
 rtc = RTC()
@@ -22,7 +23,15 @@ timer = Timer(
     1,
     mode=Timer.PERIODIC,
     period=10000,
-    callback=lambda t: print(rtc.datetime())
+    callback=lambda t: print(f"Year: {rtc.datetime()[0]}\n" +
+                             f"Month: {rtc.datetime()[1]}\n" +
+                             f"Day: {rtc.datetime()[2]}\n" +
+                             f"Weekday: {rtc.datetime()[3]}\n" +
+                             f"Hour: {rtc.datetime()[4]}\n" +
+                             f"Minute: {rtc.datetime()[5]}\n" +
+                             f"Second: {rtc.datetime()[6]}\n" +
+                             f"Microsecond: {rtc.datetime()[7]}\n"
+                             )
 )
 
 # Initialize and start a PWM signal on the external LED using a frequency of 1 Hz and a duty cycle of 256. The LED
@@ -62,3 +71,6 @@ def change_frequency(state):
         pwm0.freq(frequency)
 
 pin = Debounce(Pin(23, Pin.IN, Pin.PULL_UP), change_frequency)
+
+while True:
+    sleep(1000)
